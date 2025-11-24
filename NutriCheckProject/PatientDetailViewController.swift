@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import CoreData
+internal import CoreData
 
 class PatientDetailViewController: UIViewController {
 
@@ -20,10 +20,13 @@ class PatientDetailViewController: UIViewController {
     private let editButton = createMenuButton(title: "Editar Datos")
     private let viewButton = createMenuButton(title: "Visualizar Datos")
     private let deleteButton = createMenuButton(title: "Eliminar Paciente", color: .systemRed)
-    private let calculateButton = createMenuButton(title: "Calcular Calorías")
+    private let calculateButton = createMenuButton(title: "Calculadora Básica")
+    private let waterButton = createMenuButton(title: "Requerimiento Hídrico", color: .systemCyan)
+    private let macroButton = createMenuButton(title: "Distribución de Macros", color: .systemOrange)
+    private let espenButton = createMenuButton(title: "Cálculo ESPEN (UCI)", color: .systemPurple)
 
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [editButton, viewButton, deleteButton, calculateButton])
+        let stack = UIStackView(arrangedSubviews: [editButton, viewButton, calculateButton, macroButton, waterButton, espenButton, deleteButton])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.spacing = 20
@@ -58,6 +61,9 @@ class PatientDetailViewController: UIViewController {
         viewButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         calculateButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        waterButton.addTarget(self, action: #selector(waterTapped), for: .touchUpInside)
+        espenButton.addTarget(self, action: #selector(espenTapped), for: .touchUpInside)
+        macroButton.addTarget(self, action: #selector(macroTapped), for: .touchUpInside)
     }
     
     // MARK: - Actions
@@ -68,6 +74,24 @@ class PatientDetailViewController: UIViewController {
              performSegue(withIdentifier: "showCalculatorSegue", sender: self)
         }
     }
+    
+    @objc func espenTapped() {
+        let espenVC = EspenCalculatorViewController()
+        espenVC.patient = self.patient
+        navigationController?.pushViewController(espenVC, animated: true)
+    }
+    
+    @objc func macroTapped() {
+        let macroVC = MacroCalculatorViewController()
+        macroVC.patient = self.patient
+        navigationController?.pushViewController(macroVC, animated: true)
+    }
+    
+    @objc func waterTapped() {
+            let waterVC = WaterCalculatorViewController()
+            waterVC.patient = self.patient
+            navigationController?.pushViewController(waterVC, animated: true)
+        }
     
     @objc func deleteTapped() {
         let alert = UIAlertController(title: "Confirmar Eliminación", message: "Este paciente será eliminado permanentemente. ¿Deseas continuar?", preferredStyle: .alert)
@@ -99,8 +123,11 @@ class PatientDetailViewController: UIViewController {
             
             destinationVC.patient = self.patient
             destinationVC.isEditable = (buttonSender == editButton)
+            
+        } else if segue.identifier == "showCalculatorSegue" {
+            guard let destinationVC = segue.destination as? CalorieCalculatorViewController else { return }
+            destinationVC.patient = self.patient
         }
-       
     }
 }
 

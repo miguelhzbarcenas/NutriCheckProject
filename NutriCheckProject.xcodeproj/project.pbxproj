@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EA40F91E2ED481AF0045C3EF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA40F91D2ED481AF0045C3EF /* CoreData.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		EA33E91B2E9115D100269327 /* NutriCheckProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutriCheckProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA40F91D2ED481AF0045C3EF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -26,6 +31,9 @@
 			exceptions = (
 				EA33E9302E9115D100269327 /* Exceptions for "NutriCheckProject" folder in "NutriCheckProject" target */,
 			);
+			explicitFileTypes = {
+				NutriCheckProject.xcdatamodeld/NutriCheckProject.xcdatamodel = wrapper.xcdatamodel;
+			};
 			path = NutriCheckProject;
 			sourceTree = "<group>";
 		};
@@ -36,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA40F91E2ED481AF0045C3EF /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				EA33E91D2E9115D100269327 /* NutriCheckProject */,
+				EA40F91C2ED481AF0045C3EF /* Frameworks */,
 				EA33E91C2E9115D100269327 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +66,14 @@
 				EA33E91B2E9115D100269327 /* NutriCheckProject.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EA40F91C2ED481AF0045C3EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA40F91D2ED481AF0045C3EF /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
